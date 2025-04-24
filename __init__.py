@@ -7,8 +7,8 @@ from .errors import YabetooError
 from .models.payment import (
     MomoData,
     PaymentMethodData,
-    CreatePaymentIntentRequest,
-    ConfirmPaymentIntentRequest
+    CreateIntentRequest,
+    ConfirmIntentRequest
 )
 from .models.checkout import (
     CheckoutItem,
@@ -25,8 +25,8 @@ __all__ = [
     "MomoData",
     "PaymentMethodData",
     "CheckoutItem",
-    "CreatePaymentIntentRequest",
-    "ConfirmPaymentIntentRequest",
+    "CreateIntentRequest",
+    "ConfirmIntentRequest",
     "CreateCheckoutSession",
     "CreateDisbursementRequest",
     "CreateRemittanceRequest"

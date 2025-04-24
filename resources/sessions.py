@@ -15,4 +15,5 @@ class Sessions(ResourceBase):
         Returns:
             Checkout session details
         """
-        return self._client.request('POST', '/sessions', data)
+        response = self._client.request('POST', '/sessions', data)
+        return CheckoutSession(**response)

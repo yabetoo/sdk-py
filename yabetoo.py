@@ -26,24 +26,24 @@ class YabetooSDK:
             options: HTTP client configuration options
         """
         
-        self.options = options or HttpClientOptions()
+        options = options or HttpClientOptions()
         
         config = YabetooConfig(secret_key)
         
-        self.checkout_client = HttpClient(
+        checkout_client = HttpClient(
             secret_key=config.secret_key,
             base_url=config.base_urls.get('checkout'),
-            options=self.options
+            options=options
         )
         
-        self.payment_client = HttpClient(
+        payment_client = HttpClient(
             secret_key=secret_key,
             base_url=config.base_urls.get('payment'),
-            options=self.options
+            options=options
         )
         
-        self.payments = Payments(self.payment_client)
-        self.sessions = Sessions(self.checkout_client)
-        self.disbursements = Disbursements(self.payment_client)
-        self.remittances = Remittances(self.payment_client)
+        self.payments = Payments(payment_client)
+        self.sessions = Sessions(checkout_client)
+        self.disbursements = Disbursements(payment_client)
+        self.remittances = Remittances(payment_client)
         

@@ -1,12 +1,11 @@
-from typing import Dict
-from models.disbursement import CreateDisbursementRequest
+from models.disbursement import CreateDisbursementRequest, Disbursement
 from resources.base import ResourceBase
 
 
 class Disbursements(ResourceBase):
     """Disbursements resource"""
     
-    def create(self, data: Dict) -> Dict:
+    def create(self, data: CreateDisbursementRequest) -> Disbursement:
         """
         Create a disbursement
         
@@ -16,10 +15,11 @@ class Disbursements(ResourceBase):
         Returns:
             Disbursement details
         """
-        request = CreateDisbursementRequest(**data)
-        return self._client.request('POST', '/disbursements', request)
+        
+        response =  self._client.request('POST', '/disbursements', data)
+        return Disbursement(**response)
     
-    def retrieve(self, disbursement_id: str) -> Dict:
+    def retrieve(self, disbursement_id: str) -> Disbursement:
         """
         Get a disbursement by ID
         
@@ -29,4 +29,5 @@ class Disbursements(ResourceBase):
         Returns:
             Disbursement details
         """
-        return self._client.request('GET', f'/disbursements/{disbursement_id}')
+        response = self._client.request('GET', f'/disbursements/{disbursement_id}')
+        return Disbursement(**response)

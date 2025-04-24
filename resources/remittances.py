@@ -1,12 +1,12 @@
 from typing import Dict
-from models.remittance import CreateRemittanceRequest, RemittanceResponse
+from models.remittance import CreateRemittanceRequest, CreateRemittanceResponse, Remittance
 from resources.base import ResourceBase
 
 
 class Remittances(ResourceBase):
     """Remittances resource"""
     
-    def create(self, data: CreateRemittanceRequest) -> RemittanceResponse:
+    def create(self, data: CreateRemittanceRequest) -> CreateRemittanceResponse:
         """
         Create a remittance
         
@@ -16,9 +16,10 @@ class Remittances(ResourceBase):
         Returns:
             Remittance details
         """
-        return self._client.request('POST', '/remittances', data)
-    
-    def retrieve(self, remittance_id: str) -> Dict:
+        response = self._client.request('POST', '/remittance', data)
+        return CreateRemittanceResponse(**response)
+
+    def retrieve(self, remittance_id: str) -> Remittance:
         """
         Get a remittance by ID
         
@@ -28,4 +29,5 @@ class Remittances(ResourceBase):
         Returns:
             Remittance details
         """
-        return self._client.request('GET', f'/remittances/{remittance_id}')
+        response = self._client.request('GET', f'/remittance/{remittance_id}')
+        return Remittance(**response)

@@ -1,9 +1,9 @@
-from typing import Optional, Dict
+from typing import Literal, Dict, Optional
 from pydantic import BaseModel
 import requests
 import json
 from errors import YabetooError
-
+HttpMethod = Literal['POST', 'GET']
 class HttpClientOptions(BaseModel):
     """HTTP client configuration options"""
     timeout: int = 30
@@ -40,7 +40,7 @@ class HttpClient:
         self.session.mount('http://', adapter)
         self.session.mount('https://', adapter)
     
-    def request(self, method: str, path: str, data: Optional[BaseModel] = None) -> Dict:
+    def request(self, method: HttpMethod, path: str, data: Optional[BaseModel] = None, params: Optional[Dict] = None) -> Dict:
         """
         Make HTTP request to API
         
@@ -48,13 +48,12 @@ class HttpClient:
             method: HTTP method (GET, POST, etc.)
             path: API endpoint path
             data: Request data as Pydantic model
+            params: Query parameters for the request
             
         Returns:
             API response as dictionary
         """
         url = f"{self.base_url}{path}"
-        print(f"url: {url}")
-        
         
         request_params = {
             'headers': self.headers,
@@ -64,12 +63,11 @@ class HttpClient:
         }
         
         try:
-            if method.upper() == 'GET':
-                response = self.session.get(url, **request_params)
-            elif method.upper() == 'POST':
-               
-                json_data = data.model_dump(by_alias=True ) if data else None
-                response = self.session.post(url, json=json_data, **request_params)
+            if method == 'GET':
+                response = self.session.get(url, params=params, **request_params)
+            elif method == 'POST':
+                json_data = data.model_dump(by_alias=True) if data else None
+                response = self.session.post(url, json=json_data, params=params, **request_params)
             else:
                 raise ValueError(f"Unsupported HTTP method: {method}")
             
@@ -90,6 +88,7 @@ class HttpClient:
                     else:
                         raise YabetooError(message=response_data['error'])
                 else:
+                    print(f"{response_data}")
                     raise YabetooError(message=f"Error: {response.status_code}")
                     
             return response_data

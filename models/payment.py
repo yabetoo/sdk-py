@@ -1,62 +1,72 @@
-from pydantic import BaseModel, Field
-from typing import Dict, Optional, Any, List
+from pydantic import BaseModel, Field, field_validator
+from typing import Dict, Optional, Any, List, Literal, Union
 from datetime import datetime
+
+
+Country = Literal['cg', 'fr']
+Operator = Literal['mtn', 'airtel']
+
 
 class MomoData(BaseModel):
     msisdn: str
-    country: str
-    operator_name: str
+    country: Country
+    operator_name: Operator
+
 
 class PaymentMethodData(BaseModel):
     type: str
     momo: MomoData
 
-class CreatePaymentIntentRequest(BaseModel):
-    amount: int
+
+class CreateIntentRequest(BaseModel):
+    amount: float
     currency: str
     description: Optional[str] = None
     metadata: Optional[Dict[str, Any]] = None
 
-class CreatePaymentIntentResponse(BaseModel):
-  id: str
-  amount: str
-  currency: str
-  label: str
-  client_secret: str = Field(alias="clientSecret")
-  created_at: datetime = Field(alias="createdAt"),
-  updated_at: datetime = Field(alias='updatedAt')
-  
-  class Config:
+
+class CreateIntentResponse(BaseModel):
+    id: str
+    amount: Union[str, float, int]  
+    currency: str
+    label: str
+    client_secret: str = Field(alias="clientSecret")
+    created_at: datetime = Field(alias="createdAt")
+    updated_at: datetime = Field(alias='updatedAt')
+
+    class Config:
         validate_by_name = True
         
+    field_validator('amount')
+    def convert_amount_to_str(cls, v):
+        if not isinstance(v, str):
+            return str(v)
+        return v
 
 
-class ConfirmPaymentIntentRequest(BaseModel):
+class ConfirmIntentRequest(BaseModel):
     client_secret: str
     payment_method_data: PaymentMethodData
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     receipt_email: Optional[str] = None
 
-class ConfirmPaymentResponse(BaseModel):
+
+class ConfirmIntentResponse(BaseModel):
     charge_id: str = Field(alias='id')
-    intent_id: str  = Field(alias='intentId')
+    intent_id: str = Field(alias='intentId')
     financial_transaction_Id: str = Field(alias='financialTransactionId')
-    transaction_id: str = Field("transactionId")
+    transaction_id: str = Field(alias="transactionId") 
     amount: float
-    status: str 
-    captured: bool 
+    status: str
+    captured: bool
     external_id: str = Field(alias="externalId")
     created_at: datetime = Field(alias="createdAt")
     updated_at: datetime = Field(alias="updatedAt")
     payment_method_id: str = Field(alias="paymentMethodId")
-    
+
     class Config:
         validate_by_name = True
-        
-
-
-
 
 class Charge(BaseModel):
     id: int
@@ -79,7 +89,6 @@ class Charge(BaseModel):
 
     class Config:
         validate_by_name = True
-        
 
 
 class Payout(BaseModel):
@@ -102,8 +111,6 @@ class Payout(BaseModel):
 
     class Config:
         validate_by_name = True
-        
-        
 
 
 class PaymentEvent(BaseModel):
@@ -116,36 +123,32 @@ class PaymentEvent(BaseModel):
 
     class Config:
         validate_by_name = True
-        
 
 
 class PaymentIntent(BaseModel):
-    id: int
-    client_secret: str
-    intent_id: str
+    id: str  
+    amount: Union[float, str]  
     currency: str
-    amount: float
-    payment_method_types: Optional[str]
-    payment_method: Optional[str]
-    last_payment_error: Optional[str]
     status: str
-    metadata: Optional[dict]
-    charge_id: Optional[str]
-    canceled_at: Optional[datetime]
-    description: Optional[str]
-    cancellation_reason: Optional[str]
-    live_mode: bool
-    payout_id: Optional[str]
-    created_at: datetime
-    updated_at: datetime
-    event: PaymentEvent
+    description: Optional[str] = None
+    metadata: Optional[Dict[str, Any]] = None
+    client_secret: Optional[str] = Field(None, alias="clientSecret")
+    created_at: Optional[datetime] = Field(None, alias="createdAt")
+    updated_at: Optional[datetime] = Field(None, alias="updatedAt")
+    payment_method_types: Optional[List[str]] = None
+    payment_method: Optional[str] = None
+    last_payment_error: Optional[str] = None
+    charge_id: Optional[str] = None
+    intent_id: Optional[str] = None
+    canceled_at: Optional[datetime] = None
+    cancellation_reason: Optional[str] = None
+    live_mode: Optional[bool] = None
+    payout_id: Optional[str] = None
+    event: Optional[Dict[str, Any]] = None  
 
     class Config:
-        validate_by_name = True
-        
-
-
-
+        populate_by_name = True  
+        extra = "ignore"  
 class Sorting(BaseModel):
     id: str = Field(..., alias="id")
     desc: bool = Field(..., alias="desc")
@@ -159,5 +162,6 @@ class PaymentFiltersRequest(BaseModel):
     def to_query_params(self) -> dict:
         params = self.model_dump(by_alias=True, exclude_none=True)
         if "sorting" in params:
-            params["sorting"] = [s.model_dump(by_alias=True) for s in self.sorting]
+            params["sorting"] = [s.model_dump(
+                by_alias=True) for s in self.sorting]
         return params

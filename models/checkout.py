@@ -30,6 +30,7 @@ class CheckoutSession(BaseModel):
     account_id: str = Field(alias="accountId")
     success_url: HttpUrl = Field(alias="successUrl")
     cancel_url: HttpUrl = Field(alias="cancelUrl")
+    url: HttpUrl = Field(alias="url")
     order_id: str = Field(alias="orderId")
     expires_at: datetime = Field(alias="expiresAt")
     session_id: str = Field(alias="id")
