@@ -10,7 +10,6 @@ class YabetooConfig:
     
     Attributes:
         secret_key (str): Secret API key for authentication
-        environment (str): API environment ('sandbox' or 'production')
         http_options (Dict): Additional HTTP client options
     """
     
@@ -32,9 +31,8 @@ class YabetooConfig:
         self.environment = environment
         
         env_prefix = 'api' if environment == EnvironmentType.PRODUCTION else 'sandbox'
-        checkout_url = "https://buy.api.yabetoopay.com/v1" if environment == EnvironmentType.PRODUCTION else 'https://buy.api.yabetoopay.com/v1'
         self.base_urls = {
-            'checkout': checkout_url,
+            'checkout': "https://buy.api.yabetoopay.com/v1",
             'payment': f"https://pay.{env_prefix}.yabetoopay.com/v1"
         }
         
