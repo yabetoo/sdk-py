@@ -22,7 +22,6 @@ class YabetooSDK:
         
         Args:
             secret_key: Your Yabetoo secret key
-            environment: Either 'sandbox' or 'production'
             options: HTTP client configuration options
         """
         

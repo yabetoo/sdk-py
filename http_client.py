@@ -3,15 +3,8 @@ from pydantic import BaseModel
 import requests
 import json
 from errors import YabetooError
+from models.common import HttpClientOptions
 HttpMethod = Literal['POST', 'GET']
-class HttpClientOptions(BaseModel):
-    """HTTP client configuration options"""
-    timeout: int = 30
-    max_retries: int = 3
-    retry_delay: int = 1
-    verify_ssl: bool = True
-    follow_redirects: bool = True
-    custom_headers: Dict[str, str] = {}
 
 class HttpClient:
     """

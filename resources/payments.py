@@ -33,8 +33,7 @@ class Payments(ResourceBase):
         """
         response = self._client.request(
             'POST', f'/payment-intents/{payment_id}/confirm', data)
-        print(f"response {response}")
-        response["amount"] = str(response["amount"])
+       
 
         return ConfirmIntentResponse(**response)
 
