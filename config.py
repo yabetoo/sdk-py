@@ -10,7 +10,7 @@ class YabetooConfig:
     
     Attributes:
         secret_key (str): Secret API key for authentication
-        http_options (Dict): Additional HTTP client options
+        http_options (HttpClientOptions): Additional HTTP client options
     """
     
     def __init__(
