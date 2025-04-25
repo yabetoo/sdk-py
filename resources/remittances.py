@@ -1,4 +1,3 @@
-from typing import Dict
 from models.remittance import CreateRemittanceRequest, CreateRemittanceResponse, Remittance
 from resources.base import ResourceBase
 
