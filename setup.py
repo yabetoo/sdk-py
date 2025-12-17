@@ -6,12 +6,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="yabetoo-py",
     version="1.0.0",
-    author="Your Name",
-    author_email="email@example.com",
+    author="Yabetoo Inc",
+    author_email="contact@yabetoopay.com",
     description="Python SDK for Yabetoo Payment API",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/danielmoumeny212/yabetoo-py",
+    url="https://github.com/yabetoo/yabetoo-py",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
