@@ -2,7 +2,7 @@
 YabetooPy - Python SDK for Yabetoo Payment API
 """
 
-from .yabetoo import YabetooSDK
+from .yabetoo import Yabetoo
 from .errors import YabetooError
 from .models.payment import (
     MomoData,
@@ -20,7 +20,7 @@ from .models.remittance import CreateRemittanceRequest
 __version__ = "1.0.0"
 
 __all__ = [
-    "YabetooSDK",
+    "Yabetoo",
     "YabetooError",
     "MomoData",
     "PaymentMethodData",

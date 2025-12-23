@@ -7,7 +7,7 @@ from resources.sessions import Sessions
 from config import YabetooConfig
 
 
-class YabetooSDK:
+class Yabetoo:
     """
     Yabetoo SDK for  Payment API
     """
