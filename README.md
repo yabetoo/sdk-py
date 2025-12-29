@@ -173,7 +173,7 @@ except YabetooError as e:
 
 ```bash
 # Clone the repository
-git clone https://github.com/danielmoumeny212/yabetoo-py.git
+git clone https://github.com/yabetoo/sdk-py.git
 
 # Install development dependencies
 pip install -e ".[dev]"
