@@ -210,9 +210,8 @@ Le SDK détecte automatiquement l'environnement selon votre clé API :
 ## Développement
 
 ```bash
-# Cloner le dépôt
-git clone https://github.com/yabetoo/yabetoo-py.git
-cd yabetoo-py
+# Clone the repository
+git clone https://github.com/yabetoo/sdk-py.git
 
 # Installer les dépendances de développement
 pip install -e ".[dev]"
@@ -240,10 +239,4 @@ Consultez le dossier [examples/](examples/) pour des exemples complets :
 
 ## Licence
 
-MIT License - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-
-## Support
-
-- Documentation : [docs.yabetoopay.com](https://docs.yabetoopay.com)
-- Email : contact@yabetoopay.com
-- GitHub Issues : [github.com/yabetoo/yabetoo-py/issues](https://github.com/yabetoo/yabetoo-py/issues)
+MIT License - see LICENSE file for details.
