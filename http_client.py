@@ -1,9 +1,8 @@
 from typing import Literal, Dict, Optional
 from pydantic import BaseModel
 import requests
-import json
-from errors import YabetooError
-from models.common import HttpClientOptions
+from .errors import YabetooError
+from .models.common import HttpClientOptions
 HttpMethod = Literal['POST', 'GET']
 
 class HttpClient:

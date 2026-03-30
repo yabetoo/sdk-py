@@ -1,5 +1,5 @@
-from models.disbursement import CreateDisbursementRequest, Disbursement
-from resources.base import ResourceBase
+from ..models.disbursement import CreateDisbursementRequest, Disbursement
+from .base import ResourceBase
 
 
 class Disbursements(ResourceBase):

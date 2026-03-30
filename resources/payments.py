@@ -1,7 +1,7 @@
 from typing import Any, Dict, List, Optional
-from models.paginated_response import PaginatedResponse
-from models.payment import ConfirmIntentRequest, ConfirmIntentResponse, CreateIntentRequest, CreateIntentResponse, PaymentFiltersRequest, PaymentIntent
-from resources.base import ResourceBase
+from ..models.paginated_response import PaginatedResponse
+from ..models.payment import ConfirmIntentRequest, ConfirmIntentResponse, CreateIntentRequest, CreateIntentResponse, PaymentFiltersRequest, PaymentIntent
+from .base import ResourceBase
 
 
 class Payments(ResourceBase):
@@ -62,10 +62,6 @@ class Payments(ResourceBase):
         Returns:
             Paginated response containing payment intents
         """
-        query_params = {}
-        
-        
-        
         response = self._client.request('GET', '/payment-intents', params=params.to_query_params())
         return PaginatedResponse({'data': response}, PaymentIntent)
     
@@ -85,7 +81,7 @@ class Payments(ResourceBase):
         filters = PaymentFiltersRequest(page=page, per_page=per_page)
         
         if sorting:
-            from models.payment import Sorting
+            from ..models.payment import Sorting
             sorting_objects = [Sorting(**sort) for sort in sorting]
             filters.sorting = sorting_objects
             

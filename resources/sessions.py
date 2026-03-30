@@ -1,5 +1,5 @@
-from .base  import ResourceBase
-from models.checkout import CreateCheckoutSession, CheckoutSession
+from .base import ResourceBase
+from ..models.checkout import CreateCheckoutSession, CheckoutSession
 
 class Sessions(ResourceBase):
     """Sessions resource for checkout sessions"""

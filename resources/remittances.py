@@ -1,5 +1,5 @@
-from models.remittance import CreateRemittanceRequest, CreateRemittanceResponse, Remittance
-from resources.base import ResourceBase
+from ..models.remittance import CreateRemittanceRequest, CreateRemittanceResponse, Remittance
+from .base import ResourceBase
 
 
 class Remittances(ResourceBase):

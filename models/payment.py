@@ -35,9 +35,10 @@ class CreateIntentResponse(BaseModel):
     updated_at: datetime = Field(alias='updatedAt')
 
     class Config:
-        validate_by_name = True
-        
-    field_validator('amount')
+        populate_by_name = True
+
+    @field_validator('amount', mode='before')
+    @classmethod
     def convert_amount_to_str(cls, v):
         if not isinstance(v, str):
             return str(v)
@@ -56,7 +57,7 @@ class ConfirmIntentResponse(BaseModel):
     charge_id: str = Field(alias='id')
     intent_id: str = Field(alias='intentId')
     financial_transaction_Id: str = Field(alias='financialTransactionId')
-    transaction_id: str = Field(alias="transactionId") 
+    transaction_id: str = Field(alias="transactionId")
     amount: float
     status: str
     captured: bool
@@ -66,7 +67,7 @@ class ConfirmIntentResponse(BaseModel):
     payment_method_id: str = Field(alias="paymentMethodId")
 
     class Config:
-        validate_by_name = True
+        populate_by_name = True
 
 class Charge(BaseModel):
     id: int
@@ -88,7 +89,7 @@ class Charge(BaseModel):
     updated_at: datetime
 
     class Config:
-        validate_by_name = True
+        populate_by_name = True
 
 
 class Payout(BaseModel):
@@ -110,7 +111,7 @@ class Payout(BaseModel):
     updated_at: datetime
 
     class Config:
-        validate_by_name = True
+        populate_by_name = True
 
 
 class PaymentEvent(BaseModel):
@@ -122,7 +123,7 @@ class PaymentEvent(BaseModel):
     payouts: List[Payout]
 
     class Config:
-        validate_by_name = True
+        populate_by_name = True
 
 
 class PaymentIntent(BaseModel):

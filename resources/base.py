@@ -1,4 +1,4 @@
-from http_client import HttpClient
+from ..http_client import HttpClient
 
 
 class ResourceBase:

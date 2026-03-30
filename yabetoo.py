@@ -1,10 +1,10 @@
 from typing import Optional
-from http_client import HttpClient, HttpClientOptions
-from resources.disbursements import Disbursements
-from resources.payments import Payments
-from resources.remittances import Remittances
-from resources.sessions import Sessions
-from config import YabetooConfig
+from .http_client import HttpClient, HttpClientOptions
+from .resources.disbursements import Disbursements
+from .resources.payments import Payments
+from .resources.remittances import Remittances
+from .resources.sessions import Sessions
+from .config import YabetooConfig
 
 
 class Yabetoo:

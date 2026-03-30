@@ -10,12 +10,12 @@ class CheckoutItem(BaseModel):
     product_name: str = Field(alias="productName")
 
     class Config:
-       validate_by_name = True
+       populate_by_name = True
 
 
 
 class CreateCheckoutSession(BaseModel):
-    account_id: str = Field(alias="accountId")  
+    account_id: str = Field(alias="accountId")
     total: float
     currency: str
     success_url: str = Field(alias="successUrl")
@@ -24,7 +24,7 @@ class CreateCheckoutSession(BaseModel):
     items: Optional[List[CheckoutItem]] = None
 
     class Config:
-        validate_by_name = True
+        populate_by_name = True
         
 class CheckoutSession(BaseModel):
     account_id: str = Field(alias="accountId")
@@ -39,4 +39,4 @@ class CheckoutSession(BaseModel):
     updated_at: datetime = Field(alias="updatedAt")
 
     class Config:
-       validate_by_name = True
+       populate_by_name = True
