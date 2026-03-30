@@ -1,9 +1,8 @@
-from yabetoo import YabetooSDK, YabetooError
-from models.payment import CreateIntentRequest, PaymentMethodData, MomoData
-from errors import ValidationError, APIError, NetworkError
+from yabetoo_py import Yabetoo, YabetooError, CreateIntentRequest, PaymentMethodData, MomoData
+from yabetoo_py.errors import ValidationError, APIError, NetworkError
 
 # Initialize SDK
-sdk = YabetooSDK("your_secret_key")
+sdk = Yabetoo("your_secret_key")
 
 def handle_validation_error(e: YabetooError):
     print("Validation Error:")

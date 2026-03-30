@@ -1,8 +1,8 @@
-from yabetoo import YabetooSDK
-from models.payment import PaymentFiltersRequest, Sorting
+from yabetoo_py import Yabetoo
+from yabetoo_py.models.payment import PaymentFiltersRequest, Sorting
 
 # Initialize SDK
-sdk = YabetooSDK("your_secret_key")
+sdk = Yabetoo("your_secret_key")
 
 # Example 1: Simple pagination
 print("Fetching first page of payments...")

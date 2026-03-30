@@ -1,8 +1,7 @@
-from yabetoo import YabetooSDK
-from models.checkout import CreateCheckoutSession, CheckoutItem
+from yabetoo_py import Yabetoo, CreateCheckoutSession, CheckoutItem
 
 # Initialize SDK
-sdk = YabetooSDK("your_secret_key")
+sdk = Yabetoo("your_secret_key")
 
 # Create product list
 products = [

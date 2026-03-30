@@ -1,8 +1,7 @@
-from yabetoo import YabetooSDK
-from models.payment import CreateIntentRequest, ConfirmIntentRequest, PaymentMethodData, MomoData
+from yabetoo_py import Yabetoo, CreateIntentRequest, ConfirmIntentRequest, PaymentMethodData, MomoData
 
 # Initialize SDK with your secret key
-sdk = YabetooSDK("your_secret_key")
+sdk = Yabetoo("your_secret_key")
 
 # Create a payment intent
 intent_data = CreateIntentRequest(

@@ -1,9 +1,7 @@
-from yabetoo import YabetooSDK
-from models.remittance import CreateRemittanceRequest
-from models.payment import PaymentMethodData, MomoData
+from yabetoo_py import Yabetoo, CreateRemittanceRequest, PaymentMethodData, MomoData
 
 # Initialize SDK
-sdk = YabetooSDK("your_secret_key")
+sdk = Yabetoo("your_secret_key")
 
 # Create remittance request
 remittance_data = CreateRemittanceRequest(
