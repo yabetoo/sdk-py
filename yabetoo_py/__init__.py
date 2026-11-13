@@ -17,7 +17,7 @@ from .models.checkout import (
 from .models.disbursement import CreateDisbursementRequest
 from .models.remittance import CreateRemittanceRequest
 
-__version__ = "1.0.0"
+__version__ = "0.1.3"
 
 __all__ = [
     "Yabetoo",

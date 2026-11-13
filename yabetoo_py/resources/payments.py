@@ -62,7 +62,8 @@ class Payments(ResourceBase):
         Returns:
             Paginated response containing payment intents
         """
-        response = self._client.request('GET', '/payment-intents', params=params.to_query_params())
+        query = params.to_query_params() if params else None
+        response = self._client.request('GET', '/payment-intents', params=query)
         return PaginatedResponse({'data': response}, PaymentIntent)
     
     def get_page(self, page: int, per_page: Optional[int] = None, 

@@ -56,8 +56,8 @@ class ConfirmIntentRequest(BaseModel):
 class ConfirmIntentResponse(BaseModel):
     charge_id: str = Field(alias='id')
     intent_id: str = Field(alias='intentId')
-    financial_transaction_Id: str = Field(alias='financialTransactionId')
-    transaction_id: str = Field(alias="transactionId")
+    financial_transaction_Id: Optional[str] = Field(None, alias='financialTransactionId')
+    transaction_id: Optional[str] = Field(None, alias="transactionId")
     amount: float
     status: str
     captured: bool

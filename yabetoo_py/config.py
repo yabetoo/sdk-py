@@ -21,6 +21,8 @@ class YabetooConfig:
      
         if not secret_key:
             raise ValueError("Secret key is required")
+        if not secret_key.startswith(("sk_test", "sk_live")):
+            raise ValueError('Invalid secret key format. Key must start with "sk_test" or "sk_live"')
         if secret_key.startswith("sk_test"):
             environment = EnvironmentType.SANDBOX
         else:
@@ -30,8 +32,9 @@ class YabetooConfig:
         self.environment = environment
         
         env_prefix = 'api' if environment == EnvironmentType.PRODUCTION else 'sandbox'
+        # The checkout API has a single host: the secret key selects the environment.
         self.base_urls = {
-            'checkout': f"https://buy.{env_prefix}.yabetoopay.com/v1",
+            'checkout': "https://buy.api.yabetoopay.com/v1",
             'payment': f"https://pay.{env_prefix}.yabetoopay.com/v1"
         }
         
