@@ -18,3 +18,5 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/yabetoo/sdk-py"
 Source = "https://github.com/yabetoo/sdk-py"
+[tool.setuptools.packages.find]
+include = ["yabetoo_py*"]
