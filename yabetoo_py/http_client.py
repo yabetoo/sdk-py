@@ -1,3 +1,4 @@
+import json
 from typing import Literal, Dict, Optional
 from pydantic import BaseModel
 import requests
@@ -80,12 +81,14 @@ class HttpClient:
                     else:
                         raise YabetooError(message=response_data['error'])
                 else:
-                    print(f"{response_data}")
-                    raise YabetooError(message=f"Error: {response.status_code}")
-                    
+                    raise YabetooError(
+                        message=response_data.get('message', f"Error: {response.status_code}"),
+                        code=response_data.get('code')
+                    )
+
             return response_data
-            
-        except requests.RequestException as e:
-            raise YabetooError(message=f"Network error: {str(e)}")
+
         except json.JSONDecodeError:
             raise YabetooError(message="Invalid JSON response from API")
+        except requests.RequestException as e:
+            raise YabetooError(message=f"Network error: {str(e)}")

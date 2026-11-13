@@ -27,16 +27,17 @@ class CreateCheckoutSession(BaseModel):
         populate_by_name = True
         
 class CheckoutSession(BaseModel):
-    account_id: str = Field(alias="accountId")
+    # The create response carries id, success_url, cancel_url, url and expires_at (a Unix timestamp).
+    account_id: Optional[str] = Field(None, alias="accountId")
     success_url: HttpUrl = Field(alias="successUrl")
     cancel_url: HttpUrl = Field(alias="cancelUrl")
     url: HttpUrl = Field(alias="url")
-    order_id: str = Field(alias="orderId")
+    order_id: Optional[str] = Field(None, alias="orderId")
     expires_at: datetime = Field(alias="expiresAt")
     session_id: str = Field(alias="id")
     metadata: Optional[Dict[str, Any]] = None
-    created_at: datetime = Field(alias="createdAt")
-    updated_at: datetime = Field(alias="updatedAt")
+    created_at: Optional[datetime] = Field(None, alias="createdAt")
+    updated_at: Optional[datetime] = Field(None, alias="updatedAt")
 
     class Config:
        populate_by_name = True
